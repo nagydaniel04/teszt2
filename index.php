@@ -1,5 +1,20 @@
+<!DOCTYPE html>
 <html>
-    <head>   
+    <head> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+             $("#country").change(function(){
+                $.ajax({
+                    url:"find_counties.php",
+                    method:"POST",
+                    data: {id : $("#country").val()}
+                }).success(function(result){
+                    $("#county").html(result);             
+                });
+            });
+        });    
+        </script>
         <style>
             .wrap{
                 width:100%
@@ -19,12 +34,13 @@
         </style>
     </head>
     <body>
-        <?php 
-            if(isset($oksucces)){
-                echo "Succes";
-            }
+        <?php   
+        if(isset($oksucces)){
+            include 'save.php';          
+            echo "Succes";
+        }
         ?>
-        <form> 
+        <form method="POST" action="save.php" class="form"> 
         <div class="wrap">
             <div class="left">
                 <fieldset class="form-group">
@@ -47,13 +63,14 @@
                 </fieldset>
                 <fieldset class="form-group">
                     <label> Country: </label>
-                    <select>
+                    <select name="country" id="country">
                         <option value="default">Choose a Country...</option>
+                        <?php include 'find_countries.php'; ?>
                     </select><br>
                 </fieldset>
                 <fieldset class="form-group">
                      <label> County: </label>
-                    <select>
+                    <select id="county">
                         <option value="default">Choose a County</option>
                     </select><br>
                 </fieldset>
