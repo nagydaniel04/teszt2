@@ -15,6 +15,60 @@
                 });
             });
         </script>
+        <!--  js valdation -->
+        <script>
+            $(document).ready(function(){
+                $(".form").submit(function(event){
+                    //nev
+                    var name=$("#name").val();
+                    //alert(name);
+                    var resn=name.match(/[A-Z][a-z]+ [A-Z][a-z]+/g);
+                    //alert(res);
+                    if(!resn){
+                        event.preventDefault();
+                        alert("nem helyes a nev");
+                    }
+                    else{
+                        //alert("helyes a nev");
+                    }
+                    //email
+                    var email=$("#email").val();
+                    //alert(email);
+                    var rese=email.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/);
+                    //alert(rese);
+                    if(!rese){
+                        event.preventDefault();
+                        alert("nem helyes az email");
+                    }
+                    else{
+                        //alert("helyes az email");
+                    }
+                    //country
+                    if($("#country").val()=='default'){
+                        event.preventDefault();
+                        alert('nincs kivalasztva orszag');
+                    }
+                    else{
+                        //alert('ki van valsztva az orszag');
+                    }
+                    if($("#county").val()=='default'){
+                        event.preventDefault();
+                        alert('nincs kivalasztva megye');
+                    }
+                    else{
+                        //alert('ki van valsztva a megye');
+                    }
+                    if($("#passw").val()==''){
+                        event.preventDefault();
+                        alert('nincs jelszo');
+                    }
+                    if($("#repassw").val()!=$("#passw").val()){
+                        event.preventDefault();
+                        alert('nem azonosak a jelszavak');
+                    }
+                });
+            });
+        </script>
         <style>
             .wrap{
                 width:100%
@@ -80,11 +134,11 @@
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Password: </label>
-                        <input type="password" name="password"><br>
+                        <input type="password" name="password" id="passw"><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Password again: </label>                  
-                        <input type="password" name="repassword"><br>
+                        <input type="password" name="repassword" id="repassw"><br>
                         <?php include 'pass.php'; ?>
                     </fieldset>
                     <fieldset class="form-group">
