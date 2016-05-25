@@ -98,12 +98,9 @@
             <div class="wrap">
                 <div class="left">
                     <fieldset class="form-group">
-                        <label> Image: </label>                        
-                        <input type="file"><br>
-                        <?php // if(true):?>
-                        <!--<img src="teszt2.jpg" style="width:304px;height:228px;">-->
-                        <?php // endif; ?>
-                        
+                        <label> Image: </label>
+                        <input type="file" name="fileToUpload" id="fileToUpload">
+                        <?php include 'image.php'; ?>                        
                     </fieldset>
                 </div>
                 <div class="rigth">
