@@ -11,7 +11,12 @@
     $sql="SELECT * FROM countries";
     $query=mysqli_query($conn,$sql);
     foreach ($query as $value){
-        ?><option value="<?php echo $value["id"] ?>"><?php echo $value["name"] ?></option><?php     
+        if(isset($okcountry)&&$value[id]==$country_id){
+            ?><option selected value="<?php echo $value["id"] ?>"><?php echo $value["name"] ?></option><?php     
+        }
+        else {
+            ?><option value="<?php echo $value["id"] ?>"><?php echo $value["name"] ?></option><?php
+        }    
     }
 
 

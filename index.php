@@ -44,8 +44,12 @@
             <div class="wrap">
                 <div class="left">
                     <fieldset class="form-group">
-                        <label> Image: </label>
-                        <input type="file" name="image" name="" id="camerainput1" accept="image/*" capture="camera"><br>
+                        <label> Image: </label>                        
+                        <input type="file"><br>
+                        <?php // if(true):?>
+                        <!--<img src="teszt2.jpg" style="width:304px;height:228px;">-->
+                        <?php // endif; ?>
+                        
                     </fieldset>
                 </div>
                 <div class="rigth">
@@ -58,7 +62,7 @@
                     <fieldset class="form-group">
                         <label> Email: </label>
                         <?php if (true): ?>
-                            <input type="text" name="email" value="<?php if (isset($name)) echo $name; ?>" id="email" ><br>
+                            <input type="text" name="email" value="<?php if (isset($email)) echo $email; ?>" id="email" ><br>
                         <?php endif; ?>
                     </fieldset>
                     <fieldset class="form-group">
@@ -80,7 +84,8 @@
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Password again: </label>                  
-                        <input type="password" name="repassword" ><br>
+                        <input type="password" name="repassword"><br>
+                        <?php include 'pass.php'; ?>
                     </fieldset>
                     <fieldset class="form-group">
                         <input class="btn" type="submit" name="submit" value="Submit"><br>
@@ -90,4 +95,3 @@
         </form>
     </body>
 </html>
-
