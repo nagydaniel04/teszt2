@@ -34,7 +34,7 @@
                     <td><?php echo $row["id"]; ?></td>
                     <td><?php echo $row["email"]; ?></td>
                     <td><?php echo $row["county"]; ?></td>
-                    <td><button formmethod="GET" formaction="index.php?id=<?php echo $row["id"]; ?>">Edit</button></td>
+                    <td><button onclick="<?php $fromusers=1 ?>"><a href="index.php?id=<?php echo $row["id"]; ?>">Edit</a></button></td>
                 </tr>
                 <?php
             }

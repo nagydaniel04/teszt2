@@ -93,6 +93,18 @@
         if (isset($oksucces)) {
             echo "Succes";
         }
+        if(isset($_GET["id"])){
+            $idu=$_GET["id"];
+            //echo $idu;
+            $sqlu="SELECT id,name,email,country_id,county_id FROM users WHERE id=$idu";
+            $queryu=mysqli_query($conn, $sqlu);
+            $q=mysqli_fetch_array($queryu);
+            $name=$q["name"];
+            $email=$q["email"];
+            $country_id=$q["country_id"];
+            $okcountry=1;
+            $county_id=$q["county_id"];
+        }
         ?>
         <form method="POST" action="index.php" class="form"> 
             <div class="wrap">
