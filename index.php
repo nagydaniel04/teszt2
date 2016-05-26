@@ -4,7 +4,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script>
             $(document).ready(function () {
-                $("#country").change(function () {
+                $("#country").click(function () {
                     $.ajax({
                         url: "find_counties.php",
                         method: "POST",
@@ -103,16 +103,17 @@
             $email=$q["email"];
             $country_id=$q["country_id"];
             $okcountry=1;
-            $county_id=$q["county_id"];
+            $county_id=$q["county_id"]; 
         }
         ?>
-        <form method="POST" action="index.php" class="form"> 
+        <form method="POST" action="index.php" class="form" enctype="multipart/form-data"> 
             <div class="wrap">
                 <div class="left">
                     <fieldset class="form-group">
                         <label> Image: </label>
-                        <input type="file" name="fileToUpload" id="fileToUpload">
-                        <?php include 'image.php'; ?>                        
+                        <input type="file" name="fileToUpload" id="fileToUpload" >
+                        <?php include 'image.php'; ?> 
+<!--                        <img src="<?php echo $_FILES["name"];?> ">-->
                     </fieldset>
                 </div>
                 <div class="rigth">
