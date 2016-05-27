@@ -13,6 +13,7 @@
         </style>
     </head>
     <body>
+        <a href="index.php">Back to form</a>
         <?php
         $servername = "localhost";
         $user = "root";
@@ -34,7 +35,7 @@
                     <td><?php echo $row["id"]; ?></td>
                     <td><?php echo $row["email"]; ?></td>
                     <td><?php echo $row["county"]; ?></td>
-                    <td><button onclick="<?php $fromusers=1 ?>"><a href="index.php?id=<?php echo $row["id"]; ?>">Edit</a></button></td>
+                    <td><button onclick="<?php $fromusers = 1 ?>"><a href="index.php?id=<?php echo $row["id"]; ?>">Edit</a></button></td>
                 </tr>
                 <?php
             }

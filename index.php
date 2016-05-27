@@ -17,52 +17,48 @@
         </script>
         <!--  js valdation -->
         <script>
-            $(document).ready(function(){
-                $(".form").submit(function(event){
+            $(document).ready(function () {
+                $(".form").submit(function (event) {
                     //nev
-                    var name=$("#name").val();
+                    var name = $("#name").val();
                     //alert(name);
-                    var resn=name.match(/[A-Z][a-z]+ [A-Z][a-z]+/g);
+                    var resn = name.match(/[A-Z][a-z]+ [A-Z][a-z]+/g);
                     //alert(res);
-                    if(!resn){
+                    if (!resn) {
                         event.preventDefault();
                         alert("nem helyes a nev");
-                    }
-                    else{
+                    } else {
                         //alert("helyes a nev");
                     }
                     //email
-                    var email=$("#email").val();
+                    var email = $("#email").val();
                     //alert(email);
-                    var rese=email.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/);
+                    var rese = email.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/);
                     //alert(rese);
-                    if(!rese){
+                    if (!rese) {
                         event.preventDefault();
                         alert("nem helyes az email");
-                    }
-                    else{
+                    } else {
                         //alert("helyes az email");
                     }
                     //country
-                    if($("#country").val()=='default'){
+                    if ($("#country").val() == 'default') {
                         event.preventDefault();
                         alert('nincs kivalasztva orszag');
-                    }
-                    else{
+                    } else {
                         //alert('ki van valsztva az orszag');
                     }
-                    if($("#county").val()=='default'){
+                    if ($("#county").val() == 'default') {
                         event.preventDefault();
                         alert('nincs kivalasztva megye');
-                    }
-                    else{
+                    } else {
                         //alert('ki van valsztva a megye');
                     }
-                    if($("#passw").val()==''){
+                    if ($("#passw").val() == '') {
                         event.preventDefault();
                         alert('nincs jelszo');
                     }
-                    if($("#repassw").val()!=$("#passw").val()){
+                    if ($("#repassw").val() != $("#passw").val()) {
                         event.preventDefault();
                         alert('nem azonosak a jelszavak');
                     }
@@ -89,22 +85,24 @@
     </head>
     <body>
         <?php
-        include 'save.php';        
+        include 'save.php';
         if (isset($oksucces)) {
             echo "Succes";
         }
-        if(isset($_GET["id"])){
-            $idu=$_GET["id"];
+        if (isset($_GET["id"])) {
+            $idu = $_GET["id"];
             //echo $idu;
-            $sqlu="SELECT image,id,name,email,country_id,county_id FROM users WHERE id=$idu";
-            $queryu=mysqli_query($conn, $sqlu);
-            $q=mysqli_fetch_array($queryu);
-            $image=$q["image"];
-            $name=$q["name"];
-            $email=$q["email"];
-            $country_id=$q["country_id"];
-            $okcountry=1;
-            $county_id=$q["county_id"]; 
+            $sqlu = "SELECT image,id,name,email,country_id,county_id,password FROM users WHERE id=$idu";
+            $queryu = mysqli_query($conn, $sqlu);
+            $q = mysqli_fetch_array($queryu);
+            $image = $q["image"];
+            $name = $q["name"];
+            $email = $q["email"];
+            $country_id = $q["country_id"];
+            $okcountry = 1;
+            $county_id = $q["county_id"];
+            $okcounty = 1;
+            $password = $q["password"];
         }
         ?>
         <form method="POST" action="index.php" class="form" enctype="multipart/form-data"> 
@@ -113,47 +111,49 @@
                     <fieldset class="form-group">
                         <label> Image: </label>
                         <input type="file" name="fileToUpload" id="fileToUpload" >
-                         <img style="width: 150px; height: 150px;" src="<?php if(isset($image)){ echo $image; } ?> ">
+                        <img style="width: 150px; height: 150px;" src="<?php if (isset($image)) {
+            echo $image;
+        } ?> ">
                     </fieldset>
                 </div>
                 <div class="rigth">
                     <fieldset class="form-group">
                         <label> Name: </label>
                         <?php if (true): ?>
-                         <input type="text" value="<?php if (isset($name)) echo $name; ?>" name="name" id="name" ><br>
-                        <?php endif; ?>
+                            <input type="text" value="<?php if (isset($name)) echo $name; ?>" name="name" id="name" ><br>
+<?php endif; ?>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Email: </label>
                         <?php if (true): ?>
                             <input type="text" name="email" value="<?php if (isset($email)) echo $email; ?>" id="email" ><br>
-                        <?php endif; ?>
+<?php endif; ?>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Country: </label>
                         <select name="country" id="country">
                             <option value="default">Choose a Country...</option>
-                            <?php include 'find_countries.php'; ?>
+<?php include 'find_countries.php'; ?>
                         </select><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> County: </label>
                         <select id="county" name="county">
-                            <?php //if (isset($okcounty)) include 'find_country.php'; ?>
+<?php if (isset($okcounty)) include 'find_counties.php'; ?>
                         </select><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Password: </label>
-                         <?php if (true): ?>
-                        <input type="password" name="password" value="<?php if (isset($password)) echo $password; ?>" id="passw" ><br>
-                        <?php endif; ?>
+                        <?php if (true): ?>
+                            <input type="password" name="password" value="<?php if (isset($password)) echo $password; ?>" id="passw" ><br>
+<?php endif; ?>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Password again: </label> 
                         <?php if (true): ?>
-                        <input type="password" name="repassword" value="<?php if (isset($password)) echo $password; ?>" id="repassw" ><br>
-                        <?php endif; ?>
-                        <?php include 'pass.php'; ?>
+                            <input type="password" name="repassword" value="<?php if (isset($password)) echo $password; ?>" id="repassw" ><br>
+<?php endif; ?>
+<?php include 'pass.php'; ?>
                     </fieldset>
                     <fieldset class="form-group">
                         <input class="btn" type="submit" name="submit" value="Submit"><br>
