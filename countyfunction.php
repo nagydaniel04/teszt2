@@ -1,16 +1,6 @@
 <?php
-include 'countyfunction.php';
-$servername = "localhost";
-$user = "root";
-$passw = "";
-$dbname = "user";
-$cid = $_POST["id"];
-$conn = mysqli_connect($servername, $user, $passw, $dbname);
-
-if (!$conn) {
-    die("connection failed:" . mysqli_connect_error());
-}
- $sql = "SELECT name, id FROM counties WHERE country_id=$cid";
+function find_county() {
+    $sql = "SELECT name, id FROM counties WHERE country_id=$cid";
     $result = mysqli_query($conn, $sql);
 ?>
     <option value="default">Choose a county...</option>
@@ -22,4 +12,4 @@ if (!$conn) {
             echo'<option value=' . $row["id"] . '>' . $row["name"] . '</option>';
         }
     }
-//find_county();
+}

@@ -1,5 +1,5 @@
 <?php
-
+include 'image.php';
 $servername = "localhost";
 $user = "root";
 $passw = "";
@@ -9,7 +9,6 @@ if (!$conn) {
     die("connection failed:" . mysqli_connect_error());
 }
 if ($_POST) {
-    $image;
     $name = $_POST["name"];
     $email = $_POST["email"];
     $country_id = $_POST["country"];
@@ -42,9 +41,10 @@ if ($_POST) {
     if($password!=$repass){
         $okrepass=0;
     }
+    $image=image();
     if ($okname && $okmail && $okcountry && $okcounty && $okpass && $okrepass) {
-        $insert = "INSERT INTO users(name,email,country_id,county_id,password)"
-                . "VALUES ('$name','$email','$country_id','$county_id','$password')";
+        $insert = "INSERT INTO users(image,name,email,country_id,county_id,password)"
+                . "VALUES ('$image','$name','$email','$country_id','$county_id','$password')";
         if (mysqli_query($conn, $insert)){
             $oksucces = 1;
         }
