@@ -36,14 +36,14 @@ if ($_POST) {
             break;
         }
     }
-    if($okemail==0){
-        echo 'Van ilyen emailcim  mar az adatbazisban';
-    }
+//    if($okemail==0){
+//        echo 'Van ilyen emailcim  mar az adatbazisban';
+//    }
     if (empty($name) || !preg_match($isname, $name) || strlen($name) > 30) {
         //echo 'Incorrect name<br>';
         $okname = 0;
     }
-    if (empty($email) || strlen($email) > 30 || (filter_var($email, FILTER_VALIDATE_EMAIL) === false) || !$okemail) {
+    if (empty($email) || strlen($email) > 30 || (filter_var($email, FILTER_VALIDATE_EMAIL) === false) /*|| !$okemail*/) {
         $okmail = 0;
     }
     if ($country_id == 'default') {
@@ -65,11 +65,18 @@ if ($_POST) {
 //                       
 //        }
 //    }
-    $image = image();     
+    $image = image();
+    $gid=$_POST['group'];
     if ($okname && $okmail && $okcountry && $okcounty && $okpass && $okrepass) {
         $insert = "INSERT INTO users(image,name,email,country_id,county_id,password)"
                 . "VALUES ('$image','$name','$email','$country_id','$county_id','$password')";
+        foreach($gid as $val){
+            $insertug="INSERT INTO ug(email,gid) VALUES ('$email','$val')";
+            $q=mysqli_query($conn, $insertug);
+            var_dump($q);
+        }
         if (mysqli_query($conn, $insert)) {
+            
             $oksucces = 1;
         }
     }

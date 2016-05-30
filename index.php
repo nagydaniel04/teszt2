@@ -164,6 +164,20 @@
                         <?php include 'pass.php'; ?>
                     </fieldset>
                     <fieldset class="form-group">
+                        <h4>Csoportok,melyeknek tagja szeretnek lenni:</h4>
+                        <input type="checkbox" name="group[]" value="3">
+                        <label>Vasarhelyiek</label>
+                        <br>
+                        <input type="checkbox" name="group[]" value="4">
+                         <label>Tudor City</label>
+                        <br> 
+                        <input type="checkbox" name="group[]" value="5">
+                        <label>Bolyaisok</label>
+                        <br>
+                        
+                        
+                    </fieldset>
+                    <fieldset class="form-group">
                         <input class="btn" type="submit" name="submit" value="Submit"><br>
                     </fieldset>
                     <a href="index.php">New account</a><br>
