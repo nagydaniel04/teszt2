@@ -58,22 +58,20 @@ if ($_POST) {
     if ($password != $repass) {
         $okrepass = 0;
     }
-//    $sql="SELECT image FROM users WHERE name=$name";
-//    $im=mysqli_query($conn, $sql);
-//    foreach ($im as $val){
-//        if($val["image"]=="teszt2"){
-//                       
-//        }
-//    }
     $image = image();
-    $gid=$_POST['group'];
+    if(isset($_POST['group'])){
+        $gid=$_POST['group'];        
+    }
+    else{
+        //echo 'nincs kivalasztva semmi';
+        $gid=array();
+    }
     if ($okname && $okmail && $okcountry && $okcounty && $okpass && $okrepass) {
         $insert = "INSERT INTO users(image,name,email,country_id,county_id,password)"
                 . "VALUES ('$image','$name','$email','$country_id','$county_id','$password')";
         foreach($gid as $val){
             $insertug="INSERT INTO ug(email,gid) VALUES ('$email','$val')";
             $q=mysqli_query($conn, $insertug);
-            var_dump($q);
         }
         if (mysqli_query($conn, $insert)) {
             
