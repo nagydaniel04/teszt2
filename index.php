@@ -66,20 +66,28 @@
             });
         </script>
         <style>
+            body{
+                background-color: lightgreen;
+            }
             .wrap{
                 width:100%
             }
             .left{
+                background-color: lightblue;
                 float:left;
-                width:28%;
+                width:31%;
             }
             .rigth{
+                background-color: lightblue;
                 float:right;
                 width: 68%;
                 border-left: 2px solid black;               
             }
             .form-group{
                 border: 0px;
+            }
+            .btn{
+                /*float: right;*/
             }
         </style>
     </head>
@@ -112,8 +120,8 @@
                         <label> Image: </label>
                         <input type="file" name="fileToUpload" id="fileToUpload" >
                         <img style="width: 150px; height: 150px;" src="<?php if (isset($image)) {
-            echo $image;
-        } ?> ">
+                                    echo $image;
+                        } ?> ">
                     </fieldset>
                 </div>
                 <div class="rigth">
@@ -121,39 +129,39 @@
                         <label> Name: </label>
                         <?php if (true): ?>
                             <input type="text" value="<?php if (isset($name)) echo $name; ?>" name="name" id="name" ><br>
-<?php endif; ?>
+                        <?php endif; ?>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Email: </label>
                         <?php if (true): ?>
                             <input type="text" name="email" value="<?php if (isset($email)) echo $email; ?>" id="email" ><br>
-<?php endif; ?>
+                        <?php endif; ?>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Country: </label>
                         <select name="country" id="country">
                             <option value="default">Choose a Country...</option>
-<?php include 'find_countries.php'; ?>
+                            <?php include 'find_countries.php'; ?>
                         </select><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> County: </label>
                         <select id="county" name="county">
-<?php if (isset($okcounty)) include 'find_counties.php'; ?>
+                            <?php if (isset($okcounty)) include 'find_counties.php'; ?>
                         </select><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Password: </label>
                         <?php if (true): ?>
                             <input type="password" name="password" value="<?php if (isset($password)) echo $password; ?>" id="passw" ><br>
-<?php endif; ?>
+                        <?php endif; ?>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Password again: </label> 
                         <?php if (true): ?>
                             <input type="password" name="repassword" value="<?php if (isset($password)) echo $password; ?>" id="repassw" ><br>
-<?php endif; ?>
-<?php include 'pass.php'; ?>
+                        <?php endif; ?>
+                        <?php include 'pass.php'; ?>
                     </fieldset>
                     <fieldset class="form-group">
                         <input class="btn" type="submit" name="submit" value="Submit"><br>
