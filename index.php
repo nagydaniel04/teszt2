@@ -119,12 +119,20 @@
         <form method="POST" action="index.php" class="form" enctype="multipart/form-data"> 
             <div class="wrap">
                 <div class="left">
+                    <input type="hidden" name="hidden" value="<?php if (isset($idu)) echo $idu; ?>">
                     <fieldset class="form-group">
                         <label> Image: </label>
                         <input type="file" name="fileToUpload" id="fileToUpload" >
-                        <img style="width: 150px; height: 150px;" src="<?php if (isset($image)&&!$image) {
-                        echo $image;}
-                        else{  
+                        <input type="hidden" name="lastimage" value="<?php if (isset($image)&&$image) {
+                            echo $image;                        
+                        }
+                        else if(!isset($image)){  
+                            echo "teszt2.jpg";
+                        } ?>">
+                        <img style="width: 150px; height: 150px;" src="<?php if (isset($image)&&$image) {
+                            echo $image;                        
+                        }
+                        else if(!isset($image)){  
                             echo "teszt2.jpg";
                         } ?> ">
                     </fieldset>

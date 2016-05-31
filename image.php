@@ -1,7 +1,6 @@
 <?php
 
-function image() {
-    
+function image() {    
     if (isset($_POST["submit"])&& $_FILES["fileToUpload"]["name"]) {
         $target_dir = "C:/xampp/htdocs/teszt2/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
