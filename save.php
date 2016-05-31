@@ -23,10 +23,7 @@ if ($_POST) {
     $okcounty = 1;
     $okpass = 1;
     $okrepass = 1;
-//    $okemail=emailtest($email,$conn);
-//    if($okemail){
-//        
-//    }
+//email unique+$okemail in if, before the insert 
     $okemail=1;
     $query="SELECT email FROM users";
     $sql=mysqli_query($conn,$query);
@@ -35,10 +32,11 @@ if ($_POST) {
             $okemail=0;
             break;
         }
+    }    
+    if($okemail==0){
+        echo 'Van ilyen emailcim  mar az adatbazisban';
     }
-//    if($okemail==0){
-//        echo 'Van ilyen emailcim  mar az adatbazisban';
-//    }
+    //
     if (empty($name) || !preg_match($isname, $name) || strlen($name) > 30) {
         //echo 'Incorrect name<br>';
         $okname = 0;
@@ -66,7 +64,7 @@ if ($_POST) {
         //echo 'nincs kivalasztva semmi';
         $gid=array();
     }
-    if ($okname && $okmail && $okcountry && $okcounty && $okpass && $okrepass) {
+    if ($okname && $okmail && $okcountry && $okcounty && $okpass && $okrepass && $okemail) {
         $insert = "INSERT INTO users(image,name,email,country_id,county_id,password)"
                 . "VALUES ('$image','$name','$email','$country_id','$county_id','$password')";
         foreach($gid as $val){

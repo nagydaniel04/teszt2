@@ -104,6 +104,9 @@
             $queryu = mysqli_query($conn, $sqlu);
             $q = mysqli_fetch_array($queryu);
             $image = $q["image"];
+            if($image==NULL){
+                $image="teszt2.jpg";
+            }
             $name = $q["name"];
             $email = $q["email"];
             $country_id = $q["country_id"];
@@ -119,8 +122,10 @@
                     <fieldset class="form-group">
                         <label> Image: </label>
                         <input type="file" name="fileToUpload" id="fileToUpload" >
-                        <img style="width: 150px; height: 150px;" src="<?php if (isset($image)) {
-                                    echo $image;
+                        <img style="width: 150px; height: 150px;" src="<?php if (isset($image)&&!$image) {
+                        echo $image;}
+                        else{  
+                            echo "teszt2.jpg";
                         } ?> ">
                     </fieldset>
                 </div>

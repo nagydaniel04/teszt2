@@ -19,11 +19,11 @@ function image() {
         else {
             echo "File is not an image.";
             $uploadOk = 0;
-            $imagev = "teszt2.jpg";
+            $imagev = NULL;
         }
     }
     else{ 
-        $imagev = "teszt2.jpg";
+        $imagev = NULL;
     }
     return $imagev;
 }
