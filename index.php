@@ -15,6 +15,13 @@
                 });
             });
         </script>
+<!--        <script>
+            $(document).ready(function () {
+                $("checkbox").mouseover(){
+                    
+                }
+            }
+        </script>-->
         <!--  js valdation -->
         <script>
             $(document).ready(function () {
@@ -88,6 +95,41 @@
             }
             .btn{
                 /*float: right;*/
+            } 
+            input.a,select,input.datepicker{
+                margin: 8px 0;
+                box-sizing: border-box;
+                border: 3px solid #ccc;
+                -webkit-transition: 0.5s;
+                transition: 0.5s;
+                outline: none;
+                border-radius: 6px;
+                /*background-color: blueviolet;*/
+            }
+            label,h3{
+                color:grey;
+            }
+/*            select{
+                margin: 8px 0;
+                box-sizing: border-box;
+                border: 3px solid #ccc;
+                -webkit-transition: 0.5s;
+                transition: 0.5s;
+                outline: none;
+                border-radius: 6px;
+            }*/
+            input.a:focus {
+                border: 3px solid #555;
+            }
+            input.datepicker:focus {
+                border: 3px solid #555;
+            }
+            select:focus{
+                border: 3px solid #555;
+            }
+            div.country,.county{ 
+                width: 150px;
+                display: inline-block;
             }
         </style>
     </head>
@@ -121,7 +163,7 @@
                 <div class="left">
                     <input type="hidden" name="hidden" value="<?php if (isset($idu)) echo $idu; ?>">
                     <fieldset class="form-group">
-                        <label> Image: </label>
+                        <label> Image: </label><br>
                         <input type="file" name="fileToUpload" id="fileToUpload" >
                         <input type="hidden" name="lastimage" value="<?php if (isset($image)&&$image) {
                             echo $image;                        
@@ -131,61 +173,67 @@
                         } ?>">
                         <img style="width: 150px; height: 150px;" src="<?php if (isset($image)&&$image) {
                             echo $image;                        
-                        }
-                        else if(!isset($image)){  
-                            echo "teszt2.jpg";
+//                        }
+//                        else if(!isset($image)){  
+//                            echo "teszt2.jpg";
                         } ?> ">
                     </fieldset>
                 </div>
                 <div class="rigth">
                     <fieldset class="form-group">
-                        <label> Name: </label>
+                        <label> Name: </label><br>
                         <?php if (true): ?>
-                            <input type="text" value="<?php if (isset($name)) echo $name; ?>" name="name" id="name" ><br>
+                            <input type="text"  class="a" value="<?php if (isset($name)) echo $name; ?>" name="name" id="name" ><br>
                         <?php endif; ?>
                     </fieldset>
                     <fieldset class="form-group">
-                        <label> Email: </label>
+                        <label> Email: </label><br>
                         <?php if (true): ?>
-                            <input type="text" name="email" value="<?php if (isset($email)) echo $email; ?>" id="email" ><br>
+                            <input type="text" class="a" name="email" value="<?php if (isset($email)) echo $email; ?>" id="email" ><br>
+                        <?php endif; ?>
+                    </fieldset>
+                    <div class="locality">
+                        <div class="country">                          
+                            <fieldset class="form-group">
+                                <label> Country: </label><br>
+                                <select name="country" id="country"  class="a" >
+                                    <option value="default">Choose a Country...</option>
+                                    <?php include 'find_countries.php'; ?>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="county">
+                            <fieldset class="form-group">
+                                <label> County: </label><br>
+                                <select id="county" name="county"  class="a" >
+                                    <option value="default">Choose a County...</option>
+                                    <?php if (isset($okcounty)) include 'find_counties.php'; ?>
+                                </select><br>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <fieldset class="form-group">
+                        <label>Birthday:</label><br>
+                        <input type="date" class="datepicker"><br>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label> Password: </label><br>
+                        <?php if (true): ?>
+                            <input type="password"  class="a" name="password" value="<?php if (isset($password)) echo $password; ?>" id="passw" ><br>
                         <?php endif; ?>
                     </fieldset>
                     <fieldset class="form-group">
-                        <label> Country: </label>
-                        <select name="country" id="country">
-                            <option value="default">Choose a Country...</option>
-                            <?php include 'find_countries.php'; ?>
-                        </select><br>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <label> County: </label>
-                        <select id="county" name="county">
-                            <?php if (isset($okcounty)) include 'find_counties.php'; ?>
-                        </select><br>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <label> Password: </label>
+                        <label> Password again: </label> <br>
                         <?php if (true): ?>
-                            <input type="password" name="password" value="<?php if (isset($password)) echo $password; ?>" id="passw" ><br>
-                        <?php endif; ?>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <label> Password again: </label> 
-                        <?php if (true): ?>
-                            <input type="password" name="repassword" value="<?php if (isset($password)) echo $password; ?>" id="repassw" ><br>
+                            <input type="password"  class="a" name="repassword" value="<?php if (isset($password)) echo $password; ?>" id="repassw" ><br>
                         <?php endif; ?>
                         <?php include 'pass.php'; ?>
                     </fieldset>
                     <fieldset class="form-group">
-                        <h4>Csoportok,melyeknek tagja szeretnek lenni:</h4>
-                        <input type="checkbox" name="group[]" value="3">
-                        <label>Vasarhelyiek</label>
-                        <br>
-                        <input type="checkbox" name="group[]" value="4">
-                         <label>Tudor City</label>
-                        <br> 
-                        <input type="checkbox" name="group[]" value="5">
-                        <label>Bolyaisok</label>
+                        <h3>Gropus:</h3>
+                        <?php include 'grouplist.php'?>
+                        <label>Add group:</label><br>
+                        <input type="text" class="a" name="addgroup">
                         <br>
                         
                         

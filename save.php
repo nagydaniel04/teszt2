@@ -1,5 +1,4 @@
 <?php
-
 include 'image.php';
 $servername = "localhost";
 $user = "root";
@@ -74,7 +73,12 @@ if ($_POST) {
             echo 'Van ilyen emailcim  mar az adatbazisban';
         }
     }
-    //
+    //add group
+    $group=$_POST["addgroup"];
+    $ins="INSERT INTO groups(name) VALUES ('$group')";
+    $add=mysqli_query($conn, $ins);
+    var_dump($ins);
+    //add 
     if ($okname && $okmail && $okcountry && $okcounty && $okpass && $okrepass && $okemail) {
         $insert = "INSERT INTO users(image,name,email,country_id,county_id,password)"
                 . "VALUES ('$image','$name','$email','$country_id','$county_id','$password')";
