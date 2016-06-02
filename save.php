@@ -48,7 +48,7 @@ if ($_POST) {
         $image = $lastimage;        
     }
     if(isset($_POST['group'])){
-        $gid=$_POST['group'];        
+        $gid=$_POST['group'];
     }
     else{
         //echo 'nincs kivalasztva semmi';
@@ -68,21 +68,22 @@ if ($_POST) {
         if(isset($idu)){
             $update="UPDATE users SET image='$image',name='$name',email='$email',country_id='$country_id',county_id='$county_id',password='$password' WHERE id='$idu'";
             $updatequery=mysqli_query($conn, $update);
+            foreach($gid as $val){
+            //ellen0rz;s hogy nincs m;g berakva
+                $insertug="INSERT INTO ug(email,gid) VALUES ('$email','$val')";
+                $q=mysqli_query($conn, $insertug);
+            }
         }
         else{
             echo 'Van ilyen emailcim  mar az adatbazisban';
         }
     }
-    //add group
-    $group=$_POST["addgroup"];
-    $ins="INSERT INTO groups(name) VALUES ('$group')";
-    $add=mysqli_query($conn, $ins);
-    var_dump($ins);
     //add 
     if ($okname && $okmail && $okcountry && $okcounty && $okpass && $okrepass && $okemail) {
         $insert = "INSERT INTO users(image,name,email,country_id,county_id,password)"
                 . "VALUES ('$image','$name','$email','$country_id','$county_id','$password')";
         foreach($gid as $val){
+            //ellen0rz;s hogy nincs m;g berakva
             $insertug="INSERT INTO ug(email,gid) VALUES ('$email','$val')";
             $q=mysqli_query($conn, $insertug);
         }

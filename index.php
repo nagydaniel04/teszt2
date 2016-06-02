@@ -15,13 +15,28 @@
                 });
             });
         </script>
-<!--        <script>
+        <script>
             $(document).ready(function () {
-                $("checkbox").mouseover(){
-                    
-                }
-            }
-        </script>-->
+                $("#addbutton").click(function (event) {
+                    $.ajax({
+                        url: "grouplist.php",
+                        method: "POST",
+                        data: {group: $("#addgroup").val(), xaction: "addnewgroup"}
+                    }).success(function (result) {
+                        $("#groups").append(result);
+                    });
+                    event.preventDefault();
+                });
+            });
+        </script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $(".datepicker").datepicker();
+            });
+        </script><!--
         <!--  js valdation -->
         <script>
             $(document).ready(function () {
@@ -214,7 +229,7 @@
                     </div>
                     <fieldset class="form-group">
                         <label>Birthday:</label><br>
-                        <input type="date" class="datepicker"><br>
+                        <input type="text" class="datepicker"><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Password: </label><br>
@@ -230,10 +245,11 @@
                         <?php include 'pass.php'; ?>
                     </fieldset>
                     <fieldset class="form-group">
-                        <h3>Gropus:</h3>
-                        <?php include 'grouplist.php'?>
+                        <h3>Groups:</h3>
+                        <spam id="groups"><?php include 'grouplist.php'?></spam>
                         <label>Add group:</label><br>
-                        <input type="text" class="a" name="addgroup">
+                        <input type="text" id="addgroup" class="a" name="addgroup">
+                        <button id="addbutton">Add group</button>
                         <br>
                         
                         
