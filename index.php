@@ -154,6 +154,9 @@
                 width: 150px;
                 display: inline-block;
             }
+            .btn{
+                background-color: greenyellow;
+            }
         </style>
     </head>
     <body>
@@ -180,7 +183,8 @@
             $county_id = $q["county_id"];
             $okcounty = 1;
             $password = $q["password"];
-            $birthday= $q["birthday"];
+            $birthday=$q["birthday"];
+            $okbirthday=1;
         }
         ?>
         <form method="POST" action="index.php" class="form" enctype="multipart/form-data"> 
@@ -189,7 +193,7 @@
                     <input type="hidden" name="hidden" value="<?php if (isset($idu)) echo $idu; ?>">
                     <fieldset class="form-group">
                         <label> Profile picture: </label><br>
-                        <input type="file" name="fileToUpload" id="fileToUpload" >
+                        <input type="file" name="fileToUpload" id="fileToUpload" ><br>
                         <input type="hidden" name="lastimage" value="<?php if (isset($image)&&$image) {
                             echo $image;                        
                         }
