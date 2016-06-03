@@ -1,5 +1,6 @@
 <?php
 include 'image.php';
+include 'srtd.php';
 $servername = "localhost";
 $user = "root";
 $passw = "";
@@ -17,6 +18,7 @@ if ($_POST) {
     $county_id = $_POST["county"];
     $password = $_POST["password"];
     $repass = $_POST["repassword"];
+    $birthday= $_POST["birthday"];
     $isname = "/^[A-Z][a-z]+ [A-Z][a-z]+$/";
     $okname = 1;
     $okmail = 1;
@@ -24,6 +26,7 @@ if ($_POST) {
     $okcounty = 1;
     $okpass = 1;
     $okrepass = 1;
+    $okbirthday=1;
     if (empty($name) || !preg_match($isname, $name) || strlen($name) > 30) {
         //echo 'Incorrect name<br>';
         $okname = 0;
@@ -36,6 +39,9 @@ if ($_POST) {
     }
     if ($county_id == 'default') {
         $okcounty = 0;
+    }
+    if (empty($birtday)) {
+        $okbirthday = 0;
     }
     if (empty($password)) {
         $okpass = 0;
@@ -58,7 +64,7 @@ if ($_POST) {
     $okemail=1;
     $query="SELECT email FROM users";
     $sql=mysqli_query($conn,$query);
-    while ($value=mysqli_fetch_array($sql)){
+    while($value=mysqli_fetch_array($sql)){
         if($value["email"]==$email){    
             $okemail=0;
             break;
@@ -66,12 +72,15 @@ if ($_POST) {
     }    
     if($okemail==0){
         if(isset($idu)){
-            $update="UPDATE users SET image='$image',name='$name',email='$email',country_id='$country_id',county_id='$county_id',password='$password' WHERE id='$idu'";
+            $update="UPDATE users SET image='$image',name='$name',email='$email',country_id='$country_id',county_id='$county_id',password='$password',birthday='$birthday' WHERE id='$idu'";
             $updatequery=mysqli_query($conn, $update);
             foreach($gid as $val){
             //ellen0rz;s hogy nincs m;g berakva
-                $insertug="INSERT INTO ug(email,gid) VALUES ('$email','$val')";
-                $q=mysqli_query($conn, $insertug);
+                $isin=singlerow($conn,$email,$val);
+                if(!$isin){
+                    $insertug="INSERT INTO ug(email,gid) VALUES ('$email','$val')";
+                    $q=mysqli_query($conn, $insertug);
+                }
             }
         }
         else{
@@ -80,8 +89,8 @@ if ($_POST) {
     }
     //add 
     if ($okname && $okmail && $okcountry && $okcounty && $okpass && $okrepass && $okemail) {
-        $insert = "INSERT INTO users(image,name,email,country_id,county_id,password)"
-                . "VALUES ('$image','$name','$email','$country_id','$county_id','$password')";
+        $insert = "INSERT INTO users(image,name,email,country_id,county_id,password,birthday)"
+                . "VALUES ('$image','$name','$email','$country_id','$county_id','$password',$birthday)";
         foreach($gid as $val){
             //ellen0rz;s hogy nincs m;g berakva
             $insertug="INSERT INTO ug(email,gid) VALUES ('$email','$val')";

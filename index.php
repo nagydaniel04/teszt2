@@ -88,19 +88,26 @@
             });
         </script>
         <style>
+            html{
+                border: 5px solid #aaa; 
+            }
+            header{
+                background-color: lightgray;
+                border-bottom: 5px solid lightgray;
+                border-top: 5px solid lightgray;
+                
+            }
             body{
-                background-color: lightgreen;
+                margin: 0px;
             }
             .wrap{
-                width:100%
+                width:100%;
             }
             .left{
-                background-color: lightblue;
                 float:left;
                 width:31%;
             }
             .rigth{
-                background-color: lightblue;
                 float:right;
                 width: 68%;
                 border-left: 2px solid black;               
@@ -112,9 +119,10 @@
                 /*float: right;*/
             } 
             input.a,select,input.datepicker{
+                padding: 5px;
                 margin: 8px 0;
                 box-sizing: border-box;
-                border: 3px solid #ccc;
+                border: 2px solid #ccc;
                 -webkit-transition: 0.5s;
                 transition: 0.5s;
                 outline: none;
@@ -149,6 +157,7 @@
         </style>
     </head>
     <body>
+        <header><h1>Alternativ Facebook</h1></header>
         <?php
         include 'save.php';
         if (isset($oksucces)) {
@@ -157,7 +166,7 @@
         if (isset($_GET["id"])) {
             $idu = $_GET["id"];
             //echo $idu;
-            $sqlu = "SELECT image,id,name,email,country_id,county_id,password FROM users WHERE id=$idu";
+            $sqlu = "SELECT image,id,name,email,country_id,county_id,password,birthday FROM users WHERE id=$idu";
             $queryu = mysqli_query($conn, $sqlu);
             $q = mysqli_fetch_array($queryu);
             $image = $q["image"];
@@ -171,6 +180,7 @@
             $county_id = $q["county_id"];
             $okcounty = 1;
             $password = $q["password"];
+            $birthday= $q["birthday"];
         }
         ?>
         <form method="POST" action="index.php" class="form" enctype="multipart/form-data"> 
@@ -178,7 +188,7 @@
                 <div class="left">
                     <input type="hidden" name="hidden" value="<?php if (isset($idu)) echo $idu; ?>">
                     <fieldset class="form-group">
-                        <label> Image: </label><br>
+                        <label> Profile picture: </label><br>
                         <input type="file" name="fileToUpload" id="fileToUpload" >
                         <input type="hidden" name="lastimage" value="<?php if (isset($image)&&$image) {
                             echo $image;                        
@@ -229,7 +239,7 @@
                     </div>
                     <fieldset class="form-group">
                         <label>Birthday:</label><br>
-                        <input type="text" class="datepicker"><br>
+                        <input type="text" class="datepicker" name="birthday" value="<?php if (isset($okbirthday)) echo $birthday; ?>"><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label> Password: </label><br>

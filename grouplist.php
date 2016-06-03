@@ -24,7 +24,6 @@ if(isset($_POST["group"])&& filter_input(INPUT_POST, "xaction")=="addnewgroup" )
         $sqli = "SELECT id FROM groups WHERE name='$group'";
         $queryy = mysqli_query($conn,$sqli);
         while( $valami = mysqli_fetch_array($queryy)){
-//            print_r($valami);
             ?>
             <input type="checkbox" name="group[]" value="<?php echo $valami["id"]; ?>">
             <label><?php echo $group; ?></label><br>
